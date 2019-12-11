@@ -44,7 +44,7 @@ module.exports = {
 ```
 6. And you've done to create your endpoint
 ### Using Response Handler
-I create some response formatter as middleware, all you need to is pass your data to ```req.body``` and then call ```next()```
+I create some response formatter as middleware, all you need to do is pass your data to ```req.body``` and then call ```next()```
 Of course it has format, here's the format/data that you should pass:
 ```
 req.body = [true, <YOUR DATA HERE>, 200] // True indicate success: true, and false indicate success: false and it will create errors key
