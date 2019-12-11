@@ -1,16 +1,21 @@
+let justConsoleLog = require('../../middlewares/justConsoleLog.js');
+
 let resources = [
   {
     method: 'POST',
     path: '/',
+    middlewares: [justConsoleLog],
     params: {
       some: {
         type: 'string',
         required: true,
+        example: "Sesuatu",
         in: 'body'
       },
       thing: {
         type: 'string',
         required: true,
+        example: "Juga",
         in: 'body'
       }
     },
@@ -96,5 +101,6 @@ let resources = [
 
 module.exports = {
   namespace: '/resources',
+  description: "All about resources",
   resources
 } 

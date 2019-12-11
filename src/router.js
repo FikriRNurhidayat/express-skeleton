@@ -15,18 +15,18 @@ for (let i in controller) {
         let params = {};
         let query = {};
 
-        for (let i in r.params) {
-          switch(r.params[i].in) {
+        for (let p in r.params) {
+          switch(r.params[p].in) {
             case 'path':
-              params[i] = r.params[i];
+              params[p] = r.params[p];
               break;
 
             case 'body':
-              body[i] = r.params[i];
+              body[p] = r.params[p];
               break;
 
             case 'query':
-              query[i] = r.params[i];
+              query[p] = r.params[p];
           }
         }
 
@@ -51,7 +51,7 @@ for (let i in controller) {
           success: false,
           errors: errors
         })
-      }, r.handler, responseHandler)
+      }, r.middlewares ? r.middlewares : [], r.handler, responseHandler)
     })
   })
 }
