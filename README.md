@@ -53,7 +53,6 @@ next()
 ### Accessing Swagger
 By default it should be **/documentation**, of course you can change it as your will. Just open ```src/index.js``` and find
 ```
-// src/index.js
 app.use('/YOUR_CUSTOM_ENDPOINT', swaggerUI.serve, swaggerUI.setup(docs));
 ```
 ### Using params in controllers
