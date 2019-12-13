@@ -13,6 +13,7 @@ if (input[0] == 'h' || input[0] == 'help' || input[0] == undefined) {
   var rest = input.slice(1);
 
   let file =`./src/controllers/${namespace}/${name.decapitalize()}Controller.js`
+  if (fs.existsSync(file)) return console.log(' exist'.blue, `${file}`, "\n\n File already exist!".yellow, "\n Can't overwrite the file!\n".red)
 
   resource = rest.filter(i => (i.indexOf('-') == -1) || (i.indexOf('--') == -1))
   let resources = []
