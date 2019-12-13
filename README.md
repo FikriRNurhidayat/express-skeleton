@@ -1,11 +1,16 @@
 # Express Skeleton
-This repository is definitely like its title. It's Express Skeleton with a lot of feature in it, such as Auto Generate Swagger for your API, and also you don't need to do require everytime you create a new endponit.
+This repository is definitely like its title. It's Express Skeleton with a lot of feature in it, such as Auto Generate Swagger for your API, and also you don't need to do require everytime you create a new endpoint.
 ## How to use
 Make sure you have this in your computer ```node.js 10.16 LTS``` higher version might not work properly
 * Run ```npm install```
 * You only need to create controller
 * NPM Start
 ### Controller
+Damn, bruh!
+Now you can use generator script.
+```
+npm run generate:controller v1:example :get :post orwithpath:post orwithpath:get
+```
 Every folder in controllers folder will be considered as prefix on your endpoint. In this current repository, the namespace will be **/api/v1/**. It's **/api** because of ```app.use('/api', router);```. And it's **/v1** because in the ```index.js``` of controllers folder will contain **v1** folder and it will be considered as prefix.
 If you're willing to create a new endpoint, just follow this steps:
 1. Create a new file, under *v1* folder with JS extention.
