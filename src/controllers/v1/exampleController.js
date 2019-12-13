@@ -11,11 +11,48 @@ let resources = [
       }
     },
     handler: function(req, res, next) {
-      let data = {
-        message: 'This data is from Request Header',
-        'X-Some-Key': req.headers["x-some-key"]
+      req.body = [true, req.headers["x-some-key"], 200]
+      next()
+    }
+  },
+  {
+    method: 'POST',
+    path: '/',
+    params: {
+      image: {
+        type: 'file',
+        required: true,
+        in: 'formData'
       }
-      req.body = [true, data, 200]
+    },
+    handler: function(req, res, next) {
+      console.log(req.file);
+      req.body = [true, req.file.originalname, 200]
+      next()
+    }
+  },
+  {
+    method: 'POST',
+    path: '/multiple_file',
+    params: {
+      image: {
+        type: 'file',
+        required: true,
+        in: 'formData'
+      },
+      photo: {
+        type: 'file',
+        required: true,
+        in: 'formData'
+      }
+    },
+    handler: function(req, res, next) {
+      let filenames = {}
+      // Please refers to Multer Documentation
+      for (let i in req.files) {
+        filenames[i] = req.files[i].map(i => i.originalname)
+      }
+      req.body = [true, filenames, 200]
       next()
     }
   }

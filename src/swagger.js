@@ -33,12 +33,13 @@ for (let i in controllers) {
       let method = r.method.toLowerCase()
       let parameters = []
         
-      // Validate Body
       let body = {};
       let required_body = []
       let params = {};
       let query = {};
       let header = {}
+      let formData = {}
+      let isMultipart = false;
 
       for (let i in r.params) {
         function createObject() { return Object.assign({}, r.params[i]) }
@@ -65,6 +66,11 @@ for (let i in controllers) {
           case 'header':
             header[i] = createObject();
             delete header[i].in;
+            break;
+          case 'formData':
+            formData[i] = createObject();
+            isMultipart = true;
+            delete formData[i].in
         }
       }
 
@@ -126,6 +132,20 @@ for (let i in controllers) {
         } 
       }
 
+      if (Object.keys(formData).length > 0) {
+        for (let f in formData) {
+          formDataParams = {
+            in: "formData",
+            name: f,
+            description: formData[f].description,
+            required:formData[f].required,
+            type: formData[f].type
+          }
+
+          parameters.push(formDataParams)
+        } 
+      }
+
       let path = r.path == "/" ? "" : r.path
       if (path.indexOf(":") > -1) {
         path = path.replace(":","{") + "}"
@@ -138,7 +158,7 @@ for (let i in controllers) {
       data.paths[`/${i}` + c.namespace + path][method] = {
         tags: [tagName],
         description: r.description,
-        consumes: ['application/json'],
+        consumes: [isMultipart ? 'multipart/form-data' : 'application/json'],
         produces: ['application/json'],
         parameters: parameters,
         responses:{
