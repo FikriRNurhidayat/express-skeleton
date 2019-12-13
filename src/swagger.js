@@ -1,9 +1,9 @@
 let data = {
   "swagger": "2.0",
   "info": {
-    "description": "Coba Coba",
+    "description": "A framework of framework",
     "version": "1.0.0",
-    "title": "Swagger Petstore",
+    "title": "Express Skeleton",
     "contact": {
       "email": "FikriRNurhidayat@gmail.com"
     }
@@ -38,16 +38,19 @@ for (let i in controllers) {
       let required_body = []
       let params = {};
       let query = {};
+      let header = {}
 
       for (let i in r.params) {
+        function createObject() { return Object.assign({}, r.params[i]) }
         switch(r.params[i].in) {
+
           case 'path':
-            params[i] = Object.assign({}, r.params[i]);
+            params[i] = createObject()
             delete params[i].in
             break;
 
           case 'body':
-            body[i] = Object.assign({}, r.params[i]);
+            body[i] = createObject() 
             if (body[i].required) {
               required_body.push(i)
             };
@@ -56,8 +59,12 @@ for (let i in controllers) {
             break;
 
           case 'query':
-            query[i] = Object.assign({}, r.params[i]);
+            query[i] = createObject();
             delete query[i].in
+            break;
+          case 'header':
+            header[i] = createObject();
+            delete header[i].in;
         }
       }
 
@@ -104,7 +111,22 @@ for (let i in controllers) {
         } 
       }
 
-      let path = r.path;
+      if (Object.keys(header).length > 0) {
+        for (let h in header) {
+          headerParams = {
+            in: "header",
+            name: h,
+            description: header[h].description,
+            example:header[h].example,
+            required:header[h].required,
+            type: header[h].type
+          }
+
+          parameters.push(headerParams)
+        } 
+      }
+
+      let path = r.path == "/" ? "" : r.path
       if (path.indexOf(":") > -1) {
         path = path.replace(":","{") + "}"
       }

@@ -11,7 +11,22 @@ app.use(express.urlencoded({
 app.use(morgan('dev'))
 
 app.use('/api', require('./router.js'));
-app.use('/documentation', swaggerUI.serve, swaggerUI.setup(docs))
+app.all('/', function(req, res) {
+  res.status(200).json({
+    success: true,
+    data: {
+      message: "Server Up!"
+    }
+  })
+})
+
+var docsOption = {
+    customCssUrl: '/swagger.css',
+    customJs: '/swagger.js'
+}
+
+app.use(express.static('public'))
+app.use('/documentation', swaggerUI.serve, swaggerUI.setup(docs, docsOption))
 let exceptionHandler = require('./middlewares/exceptionHandler.js');
 exceptionHandler.forEach(i => app.use(i));
 

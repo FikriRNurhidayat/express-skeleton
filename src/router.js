@@ -16,6 +16,9 @@ for (let i in controller) {
         let query = {};
 
         for (let p in r.params) {
+          if (r.params[p] == "date") {
+            r.params[p] = new Date(Date.parse(req.body[p]))
+          }
           switch(r.params[p].in) {
             case 'path':
               params[p] = r.params[p];
