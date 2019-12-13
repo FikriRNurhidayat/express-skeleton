@@ -66,3 +66,4 @@ The rule of using params is just the same as ```fastest-validator``` because I c
 * ```fastest-validator```
 * ```express```
 * ```swagger-ui-express```
+* ```multer```
