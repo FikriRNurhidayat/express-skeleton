@@ -2,24 +2,51 @@ require('../../lib/string.js');
 const color = require('colors');
 const fs = require('fs');
 var input = process.argv.slice(2);
+var yargs = require('yargs');
 
-if (input[0] == 'h' || input[0] == 'help' || input[0] == undefined) {
-  console.log("If you want to generate controller, run this command below:")
-  console.log("  npm run generate:controller ".yellow + "Namespace:ControllerName".red)
-  console.log("  npm run generate:controller ".yellow + "Namespace:ControllerName ".red + "create update delete ".blue + "--namespace=v1".green)
-} else {
-  var namespace = input[0].split(":")[0].toLowerCase() || "v1"
-  var name = input[0].split(":")[1];
-  var rest = input.slice(1);
+const argv = yargs
+  .option('namespace', {
+    alias: 'n',
+    description: 'To define your endpoint',
+    type: 'string'
+  })
+  .help()
+  .alias('help','h')
+  .argv
 
-  let file =`./src/controllers/${namespace}/${name.decapitalize()}Controller.js`
+if (argv._ != []) {
+  let name = argv._[0];
+  if (!name) {
+    console.log("  error".red,"You need to pass controller name".toUpperCase());
+    console.log("\n")
+    return console.log("  " + "example", "npm run generate:controller".blue + " " + "this_is_controller".red)
+  } else {
+    let space = name.split("_")
+    name = space[0]
+    space = space.slice(1);
+    name = name.decapitalize();
+    space = space.map(i => i.capitalize());
+    space.forEach(i => {
+      name += i
+    });
+  }
+
+  let resource = argv._.slice(1);
+  let namespace = argv.namespace || '';
+  
+  if (namespace != "") {
+    let controllerFolder = fs.readdirSync('./src/controllers')
+    if (controllerFolder.indexOf(namespace) == -1) {
+      fs.mkdirSync('./src/controllers/' + namespace)
+    }
+  }
+
+  let file =`./src/controllers/${namespace == "" ? "" : namespace + "/"}${name.decapitalize()}Controller.js`
   if (fs.existsSync(file)) return console.log(' exist'.blue, `${file}`, "\n\n File already exist!".yellow, "\n Can't overwrite the file!\n".red)
-
-  resource = rest.filter(i => (i.indexOf('-') == -1) || (i.indexOf('--') == -1))
-  let resources = []
-
+  
   fs.writeFileSync(file, "var resources = [", 'utf-8')
-
+  let resources = []
+  
   resource.forEach(i => {
     if (i.indexOf(':') == -1) {
       console.log("Cannot create ".yellow + `${i}`.red);
@@ -70,4 +97,5 @@ if (input[0] == 'h' || input[0] == 'help' || input[0] == undefined) {
   fs.appendFileSync(file, exportCode, 'utf8')
 
   console.log(" create".green, file, "\n\n")
+
 }

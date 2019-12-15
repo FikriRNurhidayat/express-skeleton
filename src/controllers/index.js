@@ -3,13 +3,22 @@ let fs = require('fs');
 // Read Current Directory
 let directory = fs.readdirSync(__dirname)
 let folders = []
+let files = []
 
 // Filter folder only 
 directory.forEach(i => {
   if (i.indexOf('.') == -1) {
     folders.push(i);
+  } else {
+    if (i.indexOf('.js') != -1 && i.indexOf('.js') == i.length - 3) {
+      files.push(i)
+    }
   }
 })
+
+files = files.filter(i => i != "index.js");
+
+console.log(files);
 
 directory = {}
 // Read all file in each folder

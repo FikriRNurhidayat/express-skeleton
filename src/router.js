@@ -15,6 +15,7 @@ function setForm(fields) {
 
 for (let i in controller) {
   controller[i].forEach(c => {
+    if (!c.resources) return;
     c.resources.forEach(r => {
       
       let isFormData = false;

@@ -7,7 +7,7 @@
     "start": "node bin/www",
     "dev": "nodemon bin/www -q",
     "generate:secret": "node script/secretKeygen.js",
-    "generate:controller": "node script/generator/controller.js"
+    "generate:controller": "bash bin/generator.sh"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "colors": "^1.4.0",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "yargs": "^15.0.2"
   }
 }
