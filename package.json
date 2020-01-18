@@ -11,9 +11,9 @@
   },
   "keywords": [],
   "author": {
-    "name":"Fikri Rahmat Nurhidayat",
-    "email":"fikrirnurhidayat@gmail.com",
-    "url":"https://www.instagram.com/fikrirnurhidayat"
+    "name": "Fikri Rahmat Nurhidayat",
+    "email": "fikrirnurhidayat@gmail.com",
+    "url": "https://www.instagram.com/fikrirnurhidayat"
   },
   "license": "ISC",
   "dependencies": {
@@ -31,6 +31,7 @@
   "devDependencies": {
     "colors": "^1.4.0",
     "nodemon": "^2.0.1",
+    "npm-script-flags": "^1.0.2",
     "yargs": "^15.0.2"
   }
 }

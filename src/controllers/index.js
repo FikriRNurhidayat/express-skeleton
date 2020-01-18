@@ -18,8 +18,6 @@ directory.forEach(i => {
 
 files = files.filter(i => i != "index.js");
 
-console.log(files);
-
 directory = {}
 // Read all file in each folder
 folders.forEach(folder => {

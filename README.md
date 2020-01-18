@@ -9,8 +9,15 @@ Make sure you have this in your computer ```node.js 10.16 LTS``` higher version 
 Damn, bruh!
 Now you can use generator script.
 ```
-npm run generate:controller v1:example :get :post orwithpath:post orwithpath:get
+npm run generate:controller <controller_name> :get :post <path>:post <path>:get --namespace=<namespace>
 ```
+Example:
+```
+npm run generate:controller test :get :post ping:get --namespace=v2
+```
+Then it will create a new file in the **src/controllers/v2/**
+
+
 Every folder in controllers folder will be considered as prefix on your endpoint. In this current repository, the namespace will be **/api/v1/**. It's **/api** because of ```app.use('/api', router);```. And it's **/v1** because in the ```index.js``` of controllers folder will contain **v1** folder and it will be considered as prefix.
 If you're willing to create a new endpoint, just follow this steps:
 1. Create a new file, under *v1* folder with JS extention.

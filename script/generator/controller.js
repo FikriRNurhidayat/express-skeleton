@@ -35,13 +35,13 @@ if (argv._ != []) {
   let namespace = argv.namespace || '';
   
   if (namespace != "") {
-    let controllerFolder = fs.readdirSync('./src/controllers')
+    let controllerFolder = fs.readdirSync('./src/controllers/')
     if (controllerFolder.indexOf(namespace) == -1) {
       fs.mkdirSync('./src/controllers/' + namespace)
     }
   }
 
-  let file =`./src/controllers/${namespace == "" ? "" : namespace + "/"}${name.decapitalize()}Controller.js`
+  let file =`./src/controllers/${namespace == "" ? "v1/" : namespace + "/"}${name.decapitalize()}Controller.js`
   if (fs.existsSync(file)) return console.log(' exist'.blue, `${file}`, "\n\n File already exist!".yellow, "\n Can't overwrite the file!\n".red)
   
   fs.writeFileSync(file, "var resources = [", 'utf-8')
