@@ -1,13 +1,5 @@
 var resources = [
   {
-    method: "GET",
-    path: "/",
-    handler: function(req, res, next) {
-      req.body = [true, "This will be your response object", 200]
-      next()
-    }
-  },
-  {
     method: "POST",
     path: "/",
     handler: function(req, res, next) {
@@ -17,7 +9,15 @@ var resources = [
   },
   {
     method: "GET",
-    path: "/test",
+    path: "/",
+    handler: function(req, res, next) {
+      req.body = [true, "This will be your response object", 200]
+      next()
+    }
+  },
+  {
+    method: "PUT",
+    path: "/edit",
     handler: function(req, res, next) {
       req.body = [true, "This will be your response object", 200]
       next()
@@ -26,6 +26,6 @@ var resources = [
 ]
 
 module.exports = {
-  namespace: "/more",
+  namespace: "/test",
   resources
 }
