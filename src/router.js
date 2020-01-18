@@ -55,11 +55,11 @@ for (let i in controller) {
         if (!r.params) return next();
         let request = new Validator();
         
-        body = body != {} ? request.validate(req.body, body) : true
-        params = params != {} ? request.validate(req.params, params) : true
-        query = query != {} ? request.validate(req.query, query) : true
+        let isBodyValid = body != {} ? request.validate(req.body, body) : true
+        let isParamsValid = params != {} ? request.validate(req.params, params) : true
+        let isQueryValid = query != {} ? request.validate(req.query, query) : true
 
-        if (body == true && params == true && query == true) return next()
+        if (isBodyValid == true && isParamsValid == true && isQueryValid == true) return next()
 
         let parameter = {
           body, query, params
