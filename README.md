@@ -13,7 +13,7 @@ npm run generate:controller <controller_name> :get :post <path>:post <path>:get 
 ```
 Example:
 ```
-npm run generate:controller test :get :post ping:get --namespace=v2
+npm run generate:controller test :get :post ping:get -- --namespace=v2
 ```
 Then it will create a new file in the **src/controllers/v2/**
 
