@@ -62,11 +62,13 @@ Of course it has format, here's the format/data that you should pass:
 req.body = [true, <YOUR DATA HERE>, 200] // True indicate success: true, and false indicate success: false and it will create errors key
 next()
 ```
+
 ### Accessing Swagger
 By default it should be **/documentation**, of course you can change it as your will. Just open ```src/index.js``` and find
-```
-app.use('/YOUR_CUSTOM_ENDPOINT', swaggerUI.serve, swaggerUI.setup(docs));
 ```js
+app.use('/YOUR_CUSTOM_ENDPOINT', swaggerUI.serve, swaggerUI.setup(docs));
+```
+
 ### Using params in controllers
 The rule of using params is just the same as ```fastest-validator``` because I create a middleware using it.
 ## Dependencies
