@@ -8,11 +8,11 @@ Make sure you have this in your computer ```node.js 10.16 LTS``` higher version 
 ### Controller
 Damn, bruh!
 Now you can use generator script.
-```
+```bash
 npm run generate:controller <controller_name> :get :post <path>:post <path>:get --namespace=<namespace>
 ```
 Example:
-```
+```bash
 npm run generate:controller test :get :post ping:get -- --namespace=v2
 ```
 Then it will create a new file in the **src/controllers/v2/**
@@ -24,7 +24,7 @@ If you're willing to create a new endpoint, just follow this steps:
 2. Create variable called **resources** as Array
 3. In resources array create an object, it will define your endpoint
 4. That object require this properties: 
-```
+```js
 {
   method: 'POST', // required
   path: '/', // required,
@@ -48,7 +48,7 @@ If you're willing to create a new endpoint, just follow this steps:
 }
 ```
 5. After that, you need to export something in that file. You have to export it this way:
-```
+```js
 module.exports = {
   namespace: '/articles', // It will be your resources name, /api/v1/article
   resources // to exports all your resources
@@ -58,7 +58,7 @@ module.exports = {
 ### Using Response Handler
 I create some response formatter as middleware, all you need to do is pass your data to ```req.body``` and then call ```next()```
 Of course it has format, here's the format/data that you should pass:
-```
+```js
 req.body = [true, <YOUR DATA HERE>, 200] // True indicate success: true, and false indicate success: false and it will create errors key
 next()
 ```
@@ -66,7 +66,7 @@ next()
 By default it should be **/documentation**, of course you can change it as your will. Just open ```src/index.js``` and find
 ```
 app.use('/YOUR_CUSTOM_ENDPOINT', swaggerUI.serve, swaggerUI.setup(docs));
-```
+```js
 ### Using params in controllers
 The rule of using params is just the same as ```fastest-validator``` because I create a middleware using it.
 ## Dependencies
